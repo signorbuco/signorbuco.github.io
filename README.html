@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Benvenuto</title>
 
+  <!-- stile base tuo -->
   <style>
     body {
       background:#0f0f0f;
@@ -15,8 +16,9 @@
       align-items:center;
       justify-content:center;
       flex-direction:column;
-      gap:1rem;
+      gap:1.5rem;
       text-align:center;
+      padding:2rem;
     }
     .card {
       background:#1a1a1a;
@@ -36,7 +38,18 @@
       font-size:1rem;
       cursor:pointer;
     }
+
+    /* piccolo fix per non far incollare la chat sopra il testo */
+    .chat-wrapper {
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      z-index:9999;
+    }
   </style>
+
+  <!-- stile della chat n8n -->
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 </head>
 <body>
   <div class="card">
@@ -45,6 +58,19 @@
   </div>
 
   <button onclick="alert('JS attivo ✅')">Test</button>
+
+  <!-- contenitore opzionale per ancorare la chat -->
+  <div class="chat-wrapper" id="chat-mount"></div>
+
+  <!-- script chat n8n -->
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'YOUR_PRODUCTION_WEBHOOK_URL',
+      // opzionale: se vuoi montarla in un div preciso invece che default bottom-right
+      // container: document.getElementById('chat-mount'),
+    });
+  </script>
 </body>
 </html>
-
